@@ -1,4 +1,17 @@
 {
+  "name": "think-ai-browser",
+  "version": "1.0.0",
+  "description": "An AI-powered browser application",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "dev": "electron . --dev",
+    "build": "electron-builder",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": ["electron", "browser", "ai", "think"],
+  "author": "Your Name",
+  "license": "MIT",
   "devDependencies": {
     "electron": "^37.3.1"
   }
