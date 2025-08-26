@@ -499,6 +499,12 @@ function showAiPanel() {
     aiPanel.classList.add('fade-in');
     document.querySelector('.main-content').classList.add('ai-panel-open');
     isAiPanelOpen = true;
+    
+    // Add welcome message if no messages exist
+    if (aiMessages.children.length === 0) {
+        addAiMessage('ai', 'Hello! I\'m your AI assistant. How can I help you today?');
+    }
+    
     aiInput.focus();
 }
 

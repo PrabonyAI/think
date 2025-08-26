@@ -9,10 +9,19 @@
     "build": "electron-builder",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "keywords": ["electron", "browser", "ai", "think"],
+  "keywords": [
+    "electron",
+    "browser",
+    "ai",
+    "think"
+  ],
   "author": "Your Name",
   "license": "MIT",
   "devDependencies": {
     "electron": "^37.3.1"
+  },
+  "dependencies": {
+    "dotenv": "^17.2.1",
+    "openai": "^5.15.0"
   }
 }

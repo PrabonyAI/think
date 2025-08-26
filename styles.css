@@ -707,6 +707,45 @@ body {
   margin: 0;
   line-height: 1.6;
   font-size: 14px;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+}
+
+.ai-message.user {
+  background: rgba(59, 130, 246, 0.2);
+  border-left: 3px solid #3b82f6;
+}
+
+.ai-message.ai {
+  background: rgba(16, 185, 129, 0.1);
+  border-left: 3px solid #10b981;
+}
+
+.ai-message.loading {
+  opacity: 0.7;
+}
+
+.ai-message.loading p::after {
+  content: '...';
+  animation: loading-dots 1.5s infinite;
+}
+
+@keyframes loading-dots {
+
+  0%,
+  33% {
+    content: '...';
+  }
+
+  34%,
+  66% {
+    content: '....';
+  }
+
+  67%,
+  100% {
+    content: '.....';
+  }
 }
 
 .ai-input-section {

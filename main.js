@@ -1,5 +1,12 @@
 const { app, BrowserWindow, ipcMain, Menu, shell } = require('electron');
 const path = require('path');
+require('dotenv').config();
+const OpenAI = require('openai');
+
+// Initialize OpenAI client
+const openai = new OpenAI({
+  apiKey: process.env.OPENAI_API_KEY,
+});
 
 let mainWindow;
 
@@ -98,14 +105,39 @@ ipcMain.handle('search-query', async (event, query) => {
 
 ipcMain.handle('ai-query', async (event, query) => {
   try {
-    // Placeholder for AI functionality
-    // This can be enhanced with actual AI API integration
+    console.log('AI Query received:', query);
+    
+    // Make request to OpenAI API
+    const completion = await openai.chat.completions.create({
+      model: "gpt-3.5-turbo",
+      messages: [
+        {
+          role: "system",
+          content: "You are a helpful AI assistant integrated into a browser called 'Think'. You help users with their questions and provide accurate, concise, and helpful responses. Keep responses conversational and friendly."
+        },
+        {
+          role: "user",
+          content: query
+        }
+      ],
+      max_tokens: 1000,
+      temperature: 0.7,
+    });
+
+    const response = completion.choices[0]?.message?.content || 'Sorry, I could not generate a response.';
+    
+    console.log('AI Response:', response);
+    
     return { 
-      success: true, 
-      response: `AI response to: "${query}". This is a placeholder response.` 
+      success: true,
+      response: response
     };
   } catch (error) {
-    return { success: false, error: error.message };
+    console.error('OpenAI API Error:', error);
+    return { 
+      success: false, 
+      error: error.message || 'Failed to get AI response'
+    };
   }
 });
 
